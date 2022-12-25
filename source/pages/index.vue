@@ -1,5 +1,9 @@
+<script setup lang="ts">
+  const { data } = useFetch('/api/user');
+</script>
 <template>
   <h1>HELLO</h1>
+  <Book />
+  <h2>{{ data }}</h2>
 </template>
-<script setup lang="ts"></script>
 <style></style>
