@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import "reflect-metadata"
+  
   const { data } = useFetch('/api/user');
 </script>
 <template>
