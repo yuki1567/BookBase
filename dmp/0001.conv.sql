@@ -37,10 +37,10 @@ CREATE TABLE `BOOKS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `USERS` VALUES 
-('1', 'test@mail.com', 'password', NULL, 'テスト01', 
+(1, 'test@mail.com', 'password', NULL, 'テスト01', 
 'テスト', NULL, NULL, NULL, NULL, NULL, NULL, '1', 
 '2022-12-01 20:20:20', '2022-12-01 20:20:20');
 
 INSERT INTO `BOOKS` VALUES
-('1', '1', '本', '本の説明', '1', '1000', '1', 
+(1, '1', '本', '本の説明', '1', '1000', '1', 
 '2022-12-01 20:20:20', '2022-12-01 20:20:20');
