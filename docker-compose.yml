@@ -1,14 +1,12 @@
 version: "3"
- 
+
 services:
   mysql:
-    image: mysql:5.6
-    hostname: 'mysql'
-    ports: 
+    image: mysql:8.0.32
+    hostname: "mysql"
+    ports:
       - "3306:3306"
     environment:
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - ./my.cnf:/etc/mysql/conf.d/my.cnf # ローカルのmy.cnfをマウント
@@ -19,7 +17,9 @@ services:
     build:
       context: "."
       dockerfile: Dockerfile
+    hostname: "node"
     ports:
       - "3000:80"
+      - "24678:24678"
     volumes:
-      - ./source:/var/www/html/source # ファイルの同期永続化
+      - ./src:/var/www/html/src # ファイルの同期永続化
