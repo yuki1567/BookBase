@@ -9,8 +9,8 @@ echo "MySQL server is available!"
 cd /var/www/html/src/
 npm install
 npm install -g pm2
-pm2 start "npm run dev" --name nuxt
-pm2 start "npm run start" --name api
+pm2 start "npm run nuxt-dev" --name nuxt
+pm2 start "npm run api-dev" --name api
 
 # Nginxの起動
 service nginx start
