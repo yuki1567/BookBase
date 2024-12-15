@@ -23,3 +23,4 @@ services:
       - "24678:24678"
     volumes:
       - ./src:/var/www/html/src # ファイルの同期永続化
+    working_dir: /var/www/html/src
