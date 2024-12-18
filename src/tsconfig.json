@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "lib": [
-        "es5",
-        "es6"
-    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["front/*"]
+    },
+    "lib": ["es5", "es6"],
     "target": "es2017",
     "module": "commonjs",
     "moduleResolution": "node",
