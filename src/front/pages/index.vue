@@ -1,31 +1,34 @@
-<script setup lang="ts">
-import BookList from '../template/BookList.vue'
-import Header from '../template/Header.vue'
-import Footer from '../template/Footer.vue'
-import Login from '../template/Login.vue'
-import Sample from '../template/sample.vue'
-
-const isLogin = false
-</script>
 <template>
-  <div id="app">
-    <Login />
-    <template v-if="isLogin">
-      <Header />
-      <BookList />
-      <Footer />
-    </template>
-    <!-- <Sample /> -->
-  </div>
+  <header class="header">
+    <Header />
+  </header>
+  <main class="main">
+    <BookList />
+  </main>
+  <footer class="footer">
+    <Footer />
+  </footer>
 </template>
-<style>
-#app {
-  font-family: Arial, sans-serif;
-  background-color: #f7f9fc;
-  height: 100vh;
-  color: #333;
+
+<script setup lang="ts">
+import Header from '@/components/template/Header.vue'
+import BookList from '@/components/template/BookList.vue'
+import Footer from '@/components/template/Footer.vue'
+</script>
+
+<style scoped>
+.header {
+  justify-content: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
-a {
-  text-decoration: none;
+
+.main {
+  margin: 60px 120px 60px 120px;
+}
+
+.footer {
+  padding: 12px;
+  background: rgb(248, 248, 248);
+  text-align: center;
 }
 </style>
