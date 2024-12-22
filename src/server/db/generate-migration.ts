@@ -4,22 +4,25 @@ import { writeFileSync, existsSync, unlinkSync } from 'fs'
 import * as chokidar from 'chokidar'
 
 async function main(): Promise<void> {
-  const { entityName, operation } = getCommandLineArguments()
-  await watchMigrationFile(resolve(__dirname, 'migrations'))
-  const tempDataSourcePath = createTempDataSourceFile(entityName)
-  generateMigration(operation, entityName, tempDataSourcePath)
-  removeTempDataSourceFile(tempDataSourcePath)
+  try {
+    const { entityName, operation } = getCommandLineArguments()
+    await watchMigrationFile(resolve(__dirname, 'migrations'))
+    const tempDataSourcePath = createTempDataSourceFile(entityName)
+    generateMigration(operation, entityName, tempDataSourcePath)
+    removeTempDataSourceFile(tempDataSourcePath)
+  } catch (error) {
+    console.error(`[ERROR] ${error.message}`)
+    return
+  }
 }
 
 function getCommandLineArguments(): { entityName: string; operation: string } {
-  const entityName = process.argv[2]
-  const operation = process.argv[3]
+  const [entityName, operation] = process.argv.slice(2)
 
   if (!entityName || !operation) {
-    console.error(
-      '[ERROR] エンティティ名とマイグレーションの種類を引数で指定してください: 例）ts-node generate-migration.ts User CreateTable',
+    throw new Error(
+      'エンティティ名とマイグレーションの種類を引数で指定してください: 例）npx ts-node generate-migration.ts User CreateTable',
     )
-    process.exit(1)
   }
 
   return { entityName, operation }
@@ -75,13 +78,13 @@ function generateMigration(
     execSync(migrationCommand, { stdio: 'pipe' })
     console.log('[SUCCESS] マイグレーション完了')
   } catch (error) {
-    console.error(`[ERROR] ${error.message}`)
+    throw new Error(`マイグレーションの生成に失敗しました。${error.message}`)
   }
 }
 
-function removeTempDataSourceFile(removeFilePath): void {
-  if (existsSync(removeFilePath)) {
-    unlinkSync(removeFilePath)
+function removeTempDataSourceFile(filePath: string): void {
+  if (existsSync(filePath)) {
+    unlinkSync(filePath)
   }
 }
 
@@ -93,30 +96,31 @@ async function watchMigrationFile(directory: string): Promise<void> {
     ignoreInitial: true,
   })
 
+  await new Promise<void>((resolve) => {
+    watcher.on('ready', () => {
+      resolve()
+    })
+  })
+
   watcher.on('add', async (filePath: string) => {
     try {
       await formatFileWithPrettier(filePath)
-      await closeWatcher(watcher)
-    } catch (error) {
-      console.error(`[ERROR] ${error.message}`)
+    } finally {
+      watcher.close()
     }
   })
 }
 
-async function formatFileWithPrettier(filePath: string): Promise<void> {
-  return new Promise((resolve, rejects) => {
+function formatFileWithPrettier(filePath: string): Promise<void> {
+  return new Promise((resolve, reject) => {
     exec(`prettier --write ${filePath}`, (error) => {
       if (error) {
-        rejects(new Error('Prettier execution failed'))
+        reject(new Error('Prettierの実行に失敗しました'))
       } else {
         resolve()
       }
     })
   })
-}
-
-async function closeWatcher(watcher: chokidar.FSWatcher): Promise<void> {
-  await watcher.close()
 }
 
 main()
