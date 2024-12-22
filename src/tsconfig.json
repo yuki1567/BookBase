@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["front/*"]
+      "@/*": ["front/*", "server/*"]
     },
     "lib": ["es5", "es6"],
     "target": "es2017",
