@@ -17,6 +17,7 @@ const tempDataSourcePath = resolve(
 )
 const entityPath = resolve(__dirname, `entities/${entityName}`)
 
+// エンティティごとにマイグレーションするため個別のDB接続情報を設定
 const dataSourceContent = `
 import { DataSource } from 'typeorm'; 
 import { ${entityName} } from '${entityPath}'
@@ -48,8 +49,7 @@ const migrationDir = resolve(
 const migrationCommand = `npx typeorm-ts-node-commonjs migration:generate ${migrationDir} -d ${tempDataSourcePath}`
 
 try {
-  const output = execSync(migrationCommand, { stdio: 'pipe' }).toString()
-  console.log(output)
+  execSync(migrationCommand, { stdio: 'pipe' })
   console.log('[SUCCESS] マイグレーション完了')
 } catch (error) {
   console.error(`[ERROR] ${error.message}`)
