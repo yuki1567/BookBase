@@ -8,9 +8,9 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: BookBase
     volumes:
       - ./my.cnf:/etc/mysql/conf.d/my.cnf # ローカルのmy.cnfをマウント
-      - ./dmp:/docker-entrypoint-initdb.d # dmpファイルをimport
     platform: linux/x86_64
 
   node:
