@@ -1,9 +1,11 @@
-import { execSync } from 'child_process'
+import { execSync, exec } from 'child_process'
 import { resolve } from 'path'
 import { writeFileSync, existsSync, unlinkSync } from 'fs'
+import * as chokidar from 'chokidar'
 
-function main(): void {
+async function main(): Promise<void> {
   const { entityName, operation } = getCommandLineArguments()
+  await watchMigrationFile(resolve(__dirname, 'migrations'))
   const tempDataSourcePath = createTempDataSourceFile(entityName)
   generateMigration(operation, entityName, tempDataSourcePath)
   removeTempDataSourceFile(tempDataSourcePath)
@@ -81,6 +83,40 @@ function removeTempDataSourceFile(removeFilePath): void {
   if (existsSync(removeFilePath)) {
     unlinkSync(removeFilePath)
   }
+}
+
+async function watchMigrationFile(directory: string): Promise<void> {
+  const watcher = chokidar.watch(directory, {
+    // 監視の継続
+    persistent: true,
+    // 既存ファイルの変更イベントを無視
+    ignoreInitial: true,
+  })
+
+  watcher.on('add', async (filePath: string) => {
+    try {
+      await formatFileWithPrettier(filePath)
+      await closeWatcher(watcher)
+    } catch (error) {
+      console.error(`[ERROR] ${error.message}`)
+    }
+  })
+}
+
+async function formatFileWithPrettier(filePath: string): Promise<void> {
+  return new Promise((resolve, rejects) => {
+    exec(`prettier --write ${filePath}`, (error) => {
+      if (error) {
+        rejects(new Error('Prettier execution failed'))
+      } else {
+        resolve()
+      }
+    })
+  })
+}
+
+async function closeWatcher(watcher: chokidar.FSWatcher): Promise<void> {
+  await watcher.close()
 }
 
 main()
