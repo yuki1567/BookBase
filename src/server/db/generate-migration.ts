@@ -1,6 +1,6 @@
 import { execSync } from 'child_process'
-import path from 'path'
-import fs from 'fs'
+import { resolve } from 'path'
+import { writeFileSync, existsSync, unlinkSync } from 'fs'
 
 const entityName = process.argv[2]
 const operation = process.argv[3]
@@ -11,11 +11,11 @@ if (!entityName || !operation) {
   process.exit(1)
 }
 
-const tempDataSourcePath = path.resolve(
+const tempDataSourcePath = resolve(
   __dirname,
   `temp-data-source-${entityName}.ts`,
 )
-const entityPath = path.join(__dirname, `./entities/${entityName}`)
+const entityPath = resolve(__dirname, `entities/${entityName}`)
 
 const dataSourceContent = `
 import { DataSource } from 'typeorm'; 
@@ -39,9 +39,9 @@ const dataSource = new DataSource({
 export default dataSource
 `
 
-fs.writeFileSync(tempDataSourcePath, dataSourceContent)
+writeFileSync(tempDataSourcePath, dataSourceContent)
 
-const migrationDir = path.join(
+const migrationDir = resolve(
   __dirname,
   `./migrations/${operation}_${entityName}s`,
 )
@@ -54,7 +54,7 @@ try {
 } catch (error) {
   console.error(`[ERROR] ${error.message}`)
 } finally {
-  if (fs.existsSync(tempDataSourcePath)) {
-    fs.unlinkSync(tempDataSourcePath)
+  if (existsSync(tempDataSourcePath)) {
+    unlinkSync(tempDataSourcePath)
   }
 }

@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import path from 'path'
+import { resolve } from 'path'
 
 const AppDataSource = new DataSource({
   type: 'mysql',
@@ -11,8 +11,8 @@ const AppDataSource = new DataSource({
   database: 'BookBase',
   synchronize: false,
   logging: true,
-  entities: [path.join(__dirname, './entities/*.ts')],
-  migrations: [path.join(__dirname, './migrations/*.ts')],
+  entities: [resolve(__dirname, 'entities/*.ts')],
+  migrations: [resolve(__dirname, 'migrations/*.ts')],
   subscribers: [],
   migrationsRun: false,
 })
