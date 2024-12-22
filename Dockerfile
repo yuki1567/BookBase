@@ -1,7 +1,7 @@
 FROM nginx:1.17
 
 RUN apt-get update && apt-get install -y curl vim locales procps build-essential lsof
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_19.x | bash -
 # nodeをインストール
 RUN apt-get install -y nodejs
 
