@@ -1,5 +1,5 @@
 <template>
-  <spna class="footer-logo">Copyright © 2024</spna>
+  <span class="footer-logo">Copyright © 2024</span>
 </template>
 
 <script setup lang="ts"></script>
