@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev:front": "nuxt dev",
-    "dev:server": "ts-node -r tsconfig-paths/register server/index.ts",
+    "dev:front": "cd front && ../node_modules/.bin/nuxt dev",
+    "dev:server": "cd server && ts-node -r tsconfig-paths/register ../server/index.ts",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "cd front && nuxt prepare",

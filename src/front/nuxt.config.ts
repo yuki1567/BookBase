@@ -4,9 +4,6 @@ export default defineNuxtConfig({
   // ssr無効化
   ssr: false,
 
-  // 参照するフロントのディレクトリ設定
-  srcDir: 'front',
-
   // Global CSS リセットCSS
   css: ['ress'],
 })
