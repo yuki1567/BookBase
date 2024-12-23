@@ -8,8 +8,8 @@
     "preview": "nuxt preview",
     "postinstall": "cd front && nuxt prepare",
     "lint": "eslint --fix './resources/**/*.{js,ts,vue}' && prettier --write './resources/**/*.{js,ts,vue}'",
-    "migration:generate": "npx ts-node server/db/generate-migration.ts",
-    "migration:run": "npx typeorm-ts-node-commonjs migration:run -d server/db/data-source.ts"
+    "migration:generate": "npx ts-node server/scripts/generate-migration.ts",
+    "migration:run": "npx typeorm-ts-node-commonjs migration:run -d server/config/data-source.ts"
   },
   "devDependencies": {
     "@eslint/js": "9.0.0",

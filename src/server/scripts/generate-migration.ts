@@ -6,7 +6,7 @@ import * as chokidar from 'chokidar'
 async function main(): Promise<void> {
   try {
     const { entityName, operation } = getCommandLineArguments()
-    await watchMigrationFile(resolve(__dirname, 'migrations'))
+    await watchMigrationFile(resolve(__dirname, '../migrations'))
     const tempDataSourcePath = createTempDataSourceFile(entityName)
     generateMigration(operation, entityName, tempDataSourcePath)
     removeTempDataSourceFile(tempDataSourcePath)
@@ -33,7 +33,10 @@ function createTempDataSourceFile(entityFileName: string): string {
     __dirname,
     `temp-data-source-${entityFileName}.ts`,
   )
-  const entityPath = resolve(__dirname, `entities/${entityFileName}`)
+  const entityPath = resolve(
+    __dirname,
+    `../app/domain/entities/${entityFileName}`,
+  )
 
   // エンティティごとにマイグレーションするため個別のDB接続情報を設定
   const dataSourceContent = `
@@ -70,7 +73,7 @@ function generateMigration(
 ): void {
   const migrationPath = resolve(
     __dirname,
-    `./migrations/${migrationAction}_${targetEntity}s`,
+    `../migrations/${migrationAction}_${targetEntity}s`,
   )
   const migrationCommand = `npx typeorm-ts-node-commonjs migration:generate ${migrationPath} -d ${configurationFilePath}`
 
