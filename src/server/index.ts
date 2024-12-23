@@ -1,28 +1,34 @@
 import express from 'express'
-import AppDataSource from './config/data-source'
-import { User } from './app/domain/entities/User'
+import AppDataSource from '@/config/data-source'
+import { User } from '@/app/domain/entities/User'
 
 const PORT = 5000
-
 const app = express()
 
-app.get('/api/hello', async (req, res) => {
-  res.json({
-    message: 'HELL!!!!!!!!!!!!!!!!!',
+const startServer = async () => {
+  const connect = await AppDataSource.initialize()
+
+  app.listen(PORT, () => {
+    console.log('Start')
   })
-})
 
-app.get('/api/user', async (req, res) => {
-  const UserEmail = await AppDataSource.getRepository(User)
-    .createQueryBuilder('user')
-    .select('user.user_email')
-    .getOne()
-
-  res.json({
-    mail: UserEmail.email,
+  app.get('/api/hello', async (req, res) => {
+    res.json({
+      message: 'HELL!!!!!!!!!!!!!!!!!',
+    })
   })
-})
 
-app.listen(PORT, () => {
-  console.log('Start')
-})
+  app.get('/api/user', async (req, res) => {
+    const UserEmail = await connect
+      .getRepository(User)
+      .createQueryBuilder('users')
+      .select('users.email')
+      .getOne()
+
+    res.json({
+      mail: UserEmail.email,
+    })
+  })
+}
+
+startServer()
