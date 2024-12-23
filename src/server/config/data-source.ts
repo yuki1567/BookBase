@@ -11,8 +11,8 @@ const AppDataSource = new DataSource({
   database: 'BookBase',
   synchronize: false,
   logging: true,
-  entities: [resolve(__dirname, 'entities/*.ts')],
-  migrations: [resolve(__dirname, 'migrations/*.ts')],
+  entities: [resolve(__dirname, '../app/domain/entities/*.ts')],
+  migrations: [resolve(__dirname, '../migrations/*.ts')],
   subscribers: [],
   migrationsRun: false,
 })
