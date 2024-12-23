@@ -10,17 +10,17 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: BookBase
     volumes:
-      - ./my.cnf:/etc/mysql/conf.d/my.cnf # ローカルのmy.cnfをマウント
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf # ローカルのmy.cnfをマウント
     platform: linux/x86_64
 
   node:
     build:
-      context: "."
+      context: "./node"
       dockerfile: Dockerfile
     hostname: "node"
     ports:
       - "3000:80"
       - "24678:24678"
     volumes:
-      - ./src:/var/www/html/src # ファイルの同期永続化
+      - ./../src:/var/www/html/src # ファイルの同期永続化
     working_dir: /var/www/html/src

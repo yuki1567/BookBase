@@ -1,6 +1,6 @@
 import express from 'express'
-import { AppDataSource } from './db/data-source'
-import { User } from './db/entities/User'
+import AppDataSource from './config/data-source'
+import { User } from './app/domain/entities/User'
 
 const PORT = 5000
 
@@ -19,10 +19,10 @@ app.get('/api/user', async (req, res) => {
     .getOne()
 
   res.json({
-    mail: UserEmail,
+    mail: UserEmail.email,
   })
 })
 
 app.listen(PORT, () => {
-  console.log('JFIEJIFJEOFJIO')
+  console.log('Start')
 })

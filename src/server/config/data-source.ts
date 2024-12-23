@@ -18,9 +18,3 @@ const AppDataSource = new DataSource({
 })
 
 export default AppDataSource
-
-AppDataSource.initialize()
-  .then(() => {
-    console.log('Inserting a new user into the database...')
-  })
-  .catch((error) => console.log(error))

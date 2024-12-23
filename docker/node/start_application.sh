@@ -6,11 +6,10 @@ sleep 30
 echo "MySQL server is available!"
 
 # アプリケーションの起動
-cd /var/www/html/src/
-npm install
-npm install -g pm2
-pm2 start "npm run nuxt-dev" --name nuxt
-pm2 start "npm run api-dev" --name api
+# cd /var/www/html/src/
+# npm install
+# npm install -g pm2
+# npm run start
 
 # Nginxの起動
 service nginx start
