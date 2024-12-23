@@ -2,12 +2,12 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev:front": "cd front && pm2 start 'npm run nuxt dev' --name nuxt",
-    "dev:server": "cd server && pm2 start 'npm run nodemon' --name server",
+    "dev:front": "cd front && pm2 start '../node_modules/.bin/nuxt dev' --name front",
+    "dev:server": "cd server && pm2 start '../node_modules/.bin/ts-node -r tsconfig-paths/register index.ts' --name server",
     "start": "npm run dev:front && npm run dev:server",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "cd front && nuxt prepare",
     "lint": "eslint --fix './resources/**/*.{js,ts,vue}' && prettier --write './resources/**/*.{js,ts,vue}'",
     "migration:generate": "npx ts-node server/db/generate-migration.ts",
     "migration:run": "npx typeorm-ts-node-commonjs migration:run -d server/db/data-source.ts"
