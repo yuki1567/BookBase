@@ -8,7 +8,7 @@ echo "MySQL server is available!"
 # アプリケーションの起動
 cd /var/www/html/src/
 npm i
-npm i -g pm2
+npm i -g pm2@5.3.0
 pm2 start ecosystem.config.js
 
 # Nginxの起動
