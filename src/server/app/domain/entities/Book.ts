@@ -9,26 +9,26 @@ import {
 @Entity('books')
 export class Book {
   @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
-  id: number
+  readonly id!: number
 
   @Column('varchar', { length: 255, nullable: false })
-  title: string
+  title!: string
 
   @Column('text', { nullable: true })
-  description: string | null
+  description!: string | null
 
   @Column('int', { unsigned: true, nullable: false })
-  price: number
+  price!: number
 
   @Column('int', { unsigned: true, nullable: false })
-  status: number
+  status!: number
 
   @CreateDateColumn({
     type: 'timestamp',
     precision: 0,
     default: () => 'CURRENT_TIMESTAMP',
   })
-  created_at: Date
+  readonly created_at!: Date
 
   @UpdateDateColumn({
     type: 'timestamp',
@@ -36,5 +36,5 @@ export class Book {
     default: () => 'CURRENT_TIMESTAMP',
     onUpdate: 'CURRENT_TIMESTAMP(0)',
   })
-  updated_at: Date
+  readonly updated_at!: Date
 }
