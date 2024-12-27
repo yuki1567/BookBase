@@ -13,8 +13,10 @@ async function main(): Promise<void> {
   } catch (error) {
     if (error instanceof Error) {
       console.error(`[ERROR] ${error.message}`)
+      return
     } else {
       console.log('不明なエラーが発生しました。')
+      return
     }
   }
 }
