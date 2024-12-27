@@ -1,18 +1,33 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["server/*"]
-    },
-    "lib": ["esnext"],
-    "target": "es2017",
+    // 最新のECMAScript仕様に対応
+    "target": "esnext",
+    // Node.js向けのモジュールシステム
     "module": "commonjs",
     "moduleResolution": "node",
+    // ESNextの型定義を含む
+    "lib": ["esnext"],
+    // 厳格な型チェックを有効にする
+    "strict": true,
+    // CommonJSモジュールとの互換性を確保
+    "esModuleInterop": true,
+    // 単一ファイルでモジュールを独立して扱う（フロントエンドでの設定）
+    "isolatedModules": true,
     "outDir": "./build",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["server/*", "front/*"]
+    },
+    // デコレータ(メゾットやプロパティ)のメタデータを生成
     "emitDecoratorMetadata": true,
+    // デコレータを使用可能にするための設定
     "experimentalDecorators": true,
     "sourceMap": true,
-    "strictPropertyInitialization": false,
-    "esModuleInterop": true
+    "strictPropertyInitialization": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true
   }
 }
