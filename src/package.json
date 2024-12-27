@@ -4,6 +4,7 @@
     "build": "nuxt build",
     "dev:front": "cd front && ../node_modules/.bin/nuxt dev",
     "dev:server": "cd server && ts-node -r tsconfig-paths/register ../server/index.ts",
+    "test": "npx jest --config server/tests/jest.config.ts",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "cd front && nuxt prepare",
