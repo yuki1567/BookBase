@@ -13,7 +13,7 @@ async function seed(): Promise<void> {
   await connect.destroy()
 }
 
-function generateUserData(loopCount): User[] {
+function generateUserData(loopCount: number): User[] {
   const users = [...Array(loopCount)].map(() => {
     const user = new User()
     user.email = faker.internet.email()
