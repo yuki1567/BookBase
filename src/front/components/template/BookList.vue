@@ -70,20 +70,11 @@
 
       .book-section1 {
         display: flex;
-
-        .book-title {
-        }
-
-        .book-price {
-        }
       }
 
       .book-section2 {
         display: flex;
         justify-content: end;
-
-        .cart-botton {
-        }
       }
     }
   }
