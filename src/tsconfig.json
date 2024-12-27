@@ -29,5 +29,9 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "strictNullChecks": true
-  }
+  },
+  // 対象となるTypeScriptファイル
+  "include": ["../src/**/*.ts"],
+  // 除外するディレクトリ
+  "exclude": ["node_modules"]
 }
