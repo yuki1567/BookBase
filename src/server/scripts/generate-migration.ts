@@ -11,8 +11,11 @@ async function main(): Promise<void> {
     generateMigration(operation, entityName, tempDataSourcePath)
     removeTempDataSourceFile(tempDataSourcePath)
   } catch (error) {
-    console.error(`[ERROR] ${error.message}`)
-    return
+    if (error instanceof Error) {
+      console.error(`[ERROR] ${error.message}`)
+    } else {
+      console.log('不明なエラーが発生しました。')
+    }
   }
 }
 
@@ -77,12 +80,8 @@ function generateMigration(
   )
   const migrationCommand = `npx typeorm-ts-node-commonjs migration:generate ${migrationPath} -d ${configurationFilePath}`
 
-  try {
-    execSync(migrationCommand, { stdio: 'pipe' })
-    console.log('[SUCCESS] マイグレーション完了')
-  } catch (error) {
-    throw new Error(`マイグレーションの生成に失敗しました。${error.message}`)
-  }
+  execSync(migrationCommand, { stdio: 'pipe' })
+  console.log('[SUCCESS] マイグレーション完了')
 }
 
 function removeTempDataSourceFile(filePath: string): void {
