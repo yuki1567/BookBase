@@ -16,7 +16,7 @@
     "outDir": "./build",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["server/*", "front/*"]
+      "@/*": ["server/*", "front/*", "shared/*"]
     },
     // デコレータ(メゾットやプロパティ)のメタデータを生成
     "emitDecoratorMetadata": true,
@@ -31,7 +31,7 @@
     "strictNullChecks": true
   },
   // 対象となるTypeScriptファイル
-  "include": ["../src/**/*.ts"],
+  "include": ["../src/**/*.ts", "../src/**/*.vue"],
   // 除外するディレクトリ
   "exclude": ["node_modules"]
 }
