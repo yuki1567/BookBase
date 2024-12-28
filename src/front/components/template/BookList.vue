@@ -1,24 +1,12 @@
 <template>
   <h3 class="book-list-title">商品一覧</h3>
-  <ul class="book-list-items">
-    <li class="book-list-item">
+  <ul v-if="books.length > 0" class="book-list-items">
+    <li v-for="book in books" class="book-list-item">
       <span class="material-icons book-image">image</span>
       <div class="book-description">
         <div class="book-section1">
-          <div class="book-title">Book1</div>
-          <div class="book-price">¥1,000</div>
-        </div>
-        <div class="book-section2">
-          <div class="cart-botton">カートに入れる</div>
-        </div>
-      </div>
-    </li>
-    <li class="book-list-item">
-      <span class="material-icons book-image">image</span>
-      <div class="book-description">
-        <div class="book-section1">
-          <div class="book-title">Book2</div>
-          <div class="book-price">¥1,000</div>
+          <div class="book-title">{{ book.title }}</div>
+          <div class="book-price">{{ book.price }}</div>
         </div>
         <div class="book-section2">
           <div class="cart-botton">カートに入れる</div>
@@ -26,21 +14,24 @@
       </div>
     </li>
   </ul>
-  <!-- <p>{{ data }}</p> -->
+  <div v-else>なし</div>
 </template>
 <script setup lang="ts">
-// import ApiService from '../../services/ApiService'
-// import { ref, onMounted } from 'vue'
+import ApiService from '@/services/ApiService'
+import { ref, onMounted } from 'vue'
+import { Books } from '@/types/api/response/book'
 
-// const data = ref()
-// const getUser = async (): Promise<void> => {
-//   const output = await ApiService.getUser()
-//   data.value = output.mail
-// }
+const books = ref<Books[]>([])
 
-// onMounted(async () => {
-//   getUser()
-// })
+const getbook = async () => {
+  const output = await ApiService.getBook()
+  books.value = output
+}
+
+onMounted(async () => {
+  await getbook()
+  console.log('値は', books.value)
+})
 </script>
 <style scoped>
 .book-list-title {
@@ -70,6 +61,7 @@
 
       .book-section1 {
         display: flex;
+        justify-content: space-between;
       }
 
       .book-section2 {
