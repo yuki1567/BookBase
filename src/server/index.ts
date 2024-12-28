@@ -4,7 +4,7 @@ import { User } from '@/app/domain/entities/User'
 import { Book } from './app/domain/entities/Book'
 import { Books } from '@/types/api/response/book'
 
-const PORT = 5000
+const PORT = 4000
 const app = express()
 const startServer = async () => {
   const connect = await AppDataSource.initialize()

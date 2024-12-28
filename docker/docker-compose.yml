@@ -13,11 +13,11 @@ services:
       - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf # ローカルのmy.cnfをマウント
     platform: linux/x86_64
 
-  node:
+  web-app:
     build:
-      context: "./node"
+      context: "./web-app"
       dockerfile: Dockerfile
-    hostname: "node"
+    hostname: "web-app"
     ports:
       - "3000:80"
       - "24678:24678"
