@@ -3,17 +3,18 @@
   "scripts": {
     "build": "nuxt build",
     "dev:front": "cd front && ../node_modules/.bin/nuxt dev",
-    "dev:server": "cd server && ts-node -r tsconfig-paths/register ../server/index.ts",
+    "dev:server": "cd server && ts-node -r tsconfig-paths/register ../server/main.ts",
     "start:all": "pm2 start ecosystem.config.js",
-    "start:stop": "pm2 stop ecosystem.config.js",
+    "start:delete": "pm2 delete ecosystem.config.js",
     "logs": "pm2 logs",
+    "list": "pm2 list",
     "test": "npx jest --config server/tests/jest.config.ts",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "cd front && nuxt prepare",
     "lint": "eslint --fix './resources/**/*.{js,ts,vue}' && prettier --write './resources/**/*.{js,ts,vue}'",
-    "migration:generate": "npx ts-node server/scripts/generate-migration.ts",
-    "migration:run": "npx typeorm-ts-node-commonjs migration:run -d server/config/data-source.ts"
+    "migration:generate": "npx ts-node server/infrastructure/database/migrations/generate-migration.ts",
+    "migration:run": "npx typeorm-ts-node-commonjs migration:run -d server/infrastructure/database/data-source.ts"
   },
   "devDependencies": {
     "@eslint/js": "9.0.0",

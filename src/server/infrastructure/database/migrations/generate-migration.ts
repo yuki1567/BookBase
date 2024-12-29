@@ -6,8 +6,8 @@ import * as chokidar from 'chokidar'
 async function main(): Promise<void> {
   try {
     const { entityName, operation } = getCommandLineArguments()
-    await watchMigrationFile(resolve(__dirname, '../migrations'))
-    const tempDataSourcePath = createTempDataSourceFile(entityName)
+    await watchMigrationFile(resolve(__dirname, './migration-files'))
+    const tempDataSourcePath = createTempDataSourceFile(`${entityName}ORM`)
     generateMigration(operation, entityName, tempDataSourcePath)
     removeTempDataSourceFile(tempDataSourcePath)
   } catch (error) {
@@ -26,7 +26,7 @@ function getCommandLineArguments(): { entityName: string; operation: string } {
 
   if (!entityName || !operation) {
     throw new Error(
-      'エンティティ名とマイグレーションの種類を引数で指定してください: 例）npx ts-node generate-migration.ts User CreateTable',
+      'エンティティ名とマイグレーションの種類を引数で指定してください: 例）npx run migration:generation User CreateTable',
     )
   }
 
@@ -38,10 +38,7 @@ function createTempDataSourceFile(entityFileName: string): string {
     __dirname,
     `temp-data-source-${entityFileName}.ts`,
   )
-  const entityPath = resolve(
-    __dirname,
-    `../app/domain/entities/${entityFileName}`,
-  )
+  const entityPath = resolve(__dirname, `../entities/${entityFileName}`)
 
   // エンティティごとにマイグレーションするため個別のDB接続情報を設定
   const dataSourceContent = `
@@ -78,7 +75,7 @@ function generateMigration(
 ): void {
   const migrationPath = resolve(
     __dirname,
-    `../migrations/${migrationAction}_${targetEntity}s`,
+    `./migration-files/${migrationAction}_${targetEntity}s`,
   )
   const migrationCommand = `npx typeorm-ts-node-commonjs migration:generate ${migrationPath} -d ${configurationFilePath}`
 

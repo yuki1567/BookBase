@@ -8,9 +8,9 @@ module.exports = {
     '@nuxtjs/eslint-config-typescript',
     'plugin:prettier/recommended',
     'plugin:nuxt/recommended',
-    "prettier"
+    'prettier',
   ],
   plugins: [],
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   rules: {},
 }

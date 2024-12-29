@@ -7,7 +7,7 @@ import {
 } from 'typeorm'
 
 @Entity('books')
-export class Book {
+export class BookORM {
   @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
   readonly id!: number
 
