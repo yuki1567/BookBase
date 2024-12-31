@@ -1,0 +1,18 @@
+{
+  //"extends": "../tsconfig.json",
+  "compilerOptions": {
+    // "module": "esnext",
+    // "lib": ["esnext", "dom"],
+    // "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@shared/*": ["../shared/*"]
+    }
+    // "types": ["vue"]
+  }
+  // // 対象となるTypeScriptファイル
+  // "include": ["../front/**/*.ts", "../front/**/*.vue"],
+  // // 除外するディレクトリ
+  // "exclude": ["node_modules"]
+}

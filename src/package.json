@@ -1,54 +1,25 @@
 {
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev:front": "cd front && ../node_modules/.bin/nuxt dev",
-    "dev:server": "cd server && ts-node -r tsconfig-paths/register ../server/main.ts",
     "start:all": "pm2 start ecosystem.config.js",
-    "start:delete": "pm2 delete ecosystem.config.js",
+    "start:server": "pm2 start ecosystem.config.js --only server",
+    "start:front": "pm2 start ecosystem.config.js --only front",
+    "delete": "pm2 delete ecosystem.config.js",
     "logs": "pm2 logs",
     "list": "pm2 list",
-    "test": "npx jest --config server/tests/jest.config.ts",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "cd front && nuxt prepare",
-    "lint": "eslint --fix './resources/**/*.{js,ts,vue}' && prettier --write './resources/**/*.{js,ts,vue}'",
-    "migration:generate": "npx ts-node server/infrastructure/database/migrations/generate-migration.ts",
-    "migration:run": "npx typeorm-ts-node-commonjs migration:run -d server/infrastructure/database/data-source.ts"
+    "lint": "eslint --fix './resources/**/*.{js,ts,vue}' && prettier --write './resources/**/*.{js,ts,vue}'"
   },
   "devDependencies": {
     "@eslint/js": "9.0.0",
-    "@faker-js/faker": "^9.3.0",
-    "@nuxt/types": "2.17.3",
-    "@types/chokidar": "2.1.7",
-    "@types/express": "4.17.14",
-    "@types/jest": "29.5.14",
-    "@types/node": "18.11.17",
     "@typescript-eslint/parser": "7.6.0",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-vue": "9.24.1",
     "globals": "15.0.0",
-    "jest": "29.7.0",
-    "nodemon": "2.0.20",
-    "nuxt": "3.0.0",
     "pm2": "5.3.0",
     "prettier": "3.2.5",
-    "ts-jest": "29.2.5",
-    "ts-node": "10.9.2",
-    "tsconfig-paths": "4.2.0",
-    "typescript": "4.5.2",
+    "typescript": "4.9.4",
     "typescript-eslint": "7.6.0"
   },
-  "dependencies": {
-    "axios": "1.6.8",
-    "chokidar": "3.6.0",
-    "express": "4.18.1",
-    "material-icons": "1.13.12",
-    "mysql2": "3.11.5",
-    "reflect-metadata": "0.1.13",
-    "ress": "5.0.2",
-    "typeorm": "0.3.20",
-    "typescript": "4.9.4"
-  }
+  "dependencies": {}
 }

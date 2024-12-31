@@ -8,6 +8,11 @@ echo "MySQL server is available!"
 # アプリケーションの起動
 cd /var/www/html/src/
 npm i
+cd /var/www/html/src/server
+npm i
+cd /var/www/html/src/front
+npm i
+cd /var/www/html/src/
 npm run start:all
 
 # Nginxの起動

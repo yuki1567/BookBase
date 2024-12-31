@@ -1,0 +1,26 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    // 最新のECMAScript仕様に対応
+    "target": "esnext",
+    // Node.js向けのモジュールシステム
+    "module": "commonjs",
+    // ESNextの型定義を含む
+    "lib": ["esnext"],
+    "outDir": "./build",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@shared/*": ["../../shared/*"]
+    },
+    // デコレータ(メゾットやプロパティ)のメタデータを生成
+    "emitDecoratorMetadata": true,
+    // デコレータを使用可能にするための設定
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": true
+  },
+  // 対象となるTypeScriptファイル
+  "include": ["../server/**/*.ts"],
+  // 除外するディレクトリ
+  "exclude": ["node_modules"]
+}

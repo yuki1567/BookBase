@@ -2,26 +2,15 @@
   "compilerOptions": {
     // 最新のECMAScript仕様に対応
     "target": "esnext",
-    // Node.js向けのモジュールシステム
-    "module": "commonjs",
     "moduleResolution": "node",
-    // ESNextの型定義を含む
-    "lib": ["esnext"],
     // 厳格な型チェックを有効にする
     "strict": true,
     // CommonJSモジュールとの互換性を確保
     "esModuleInterop": true,
-    // 単一ファイルでモジュールを独立して扱う（フロントエンドでの設定）
-    "isolatedModules": true,
-    "outDir": "./build",
     "baseUrl": ".",
     "paths": {
       "@/*": ["server/*", "front/*", "shared/*"]
     },
-    // デコレータ(メゾットやプロパティ)のメタデータを生成
-    "emitDecoratorMetadata": true,
-    // デコレータを使用可能にするための設定
-    "experimentalDecorators": true,
     "sourceMap": true,
     "strictPropertyInitialization": true,
     "noImplicitAny": true,
@@ -30,8 +19,8 @@
     "noImplicitReturns": true,
     "strictNullChecks": true
   },
-  // 対象となるTypeScriptファイル
+  // 対象となるファイル
   "include": ["../src/**/*.ts", "../src/**/*.vue"],
-  // 除外するディレクトリ
+  // 除外するファイル
   "exclude": ["node_modules"]
 }
