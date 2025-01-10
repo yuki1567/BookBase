@@ -14,7 +14,7 @@ export class UserORM {
   @Column('varchar', { length: 255, unique: true, nullable: false })
   email!: string
 
-  @Column('varchar', { length: 50, nullable: false })
+  @Column('varchar', { length: 60, nullable: false })
   password!: string
 
   @Column('int', { unsigned: true, nullable: false })

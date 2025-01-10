@@ -9,10 +9,8 @@ const config: Config = {
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
-  // transformIgnorePatterns: [
-  //   '../../node_modules/(?!your-module-to-transform|another-module-to-transform)',
-  // ],
   transformIgnorePatterns: ['node_modules'],
+  extensionsToTreatAsEsm: ['.ts'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
   },
