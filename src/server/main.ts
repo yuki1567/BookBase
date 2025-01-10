@@ -1,8 +1,8 @@
 import express, { Response } from 'express'
 import AppDataSource from '@/infrastructure/database/data-source'
 import { UserORM } from '@/infrastructure/database/entities/UserORM'
-import { BookORM } from './infrastructure/database/entities/BookORM'
-import { Books } from '@/types/api/response/book'
+import { BookORM } from '@/infrastructure/database/entities/BookORM'
+import { Books } from '@shared/types/api/response/book'
 
 const PORT = 4000
 const app = express()
@@ -11,7 +11,7 @@ const startServer = async () => {
   app.use(express.json())
 
   app.listen(PORT, () => {
-    console.log('Start------------------')
+    console.log('server application start')
   })
 
   app.get('/api/hello', async (_, res: Response) => {
