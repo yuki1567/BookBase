@@ -1,7 +1,7 @@
 import { UserORM } from '../entities/UserORM'
 import AppDataSource from '../data-source'
 import { faker } from '@faker-js/faker'
-import { PasswordUtils } from '@/utils/PasswordUtils'
+import { PasswordAdapter } from '@/infrastructure/PasswordAdapter'
 
 async function seed(): Promise<void> {
   const loopCount = Number(process.argv[2])
@@ -26,7 +26,7 @@ async function generateUserData(loopCount: number): Promise<UserORM[]> {
       const user = new UserORM()
       user.email = faker.internet.email()
       const password = faker.internet.password({ length: 8 })
-      user.password = await PasswordUtils.hash(password)
+      user.password = await PasswordAdapter.hash(password)
       user.status = 1
       return user
     }),
