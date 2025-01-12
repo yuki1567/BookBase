@@ -1,7 +1,7 @@
 {
   "name": "server",
   "scripts": {
-    "dev": "ts-node -r tsconfig-paths/register main.ts",
+    "dev": "NODE_ENV=development ts-node -r tsconfig-paths/register main.ts",
     "test": "npx jest --config tests/jest.config.ts",
     "migration:generate": "npx ts-node infrastructure/database/migrations/generate-migration.ts",
     "migration:run": "npx typeorm-ts-node-commonjs migration:run -d infrastructure/database/data-source.ts",

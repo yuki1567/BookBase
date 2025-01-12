@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { AuthController } from '../controllers/AuthController'
 import { DataSource } from 'typeorm'
-import { AuthService } from '@/application/AuthService'
+import { AuthController } from '@/interfaces/controllers/AuthController'
+import { AuthService } from '@/application/services/AuthService'
 import { UserRepository } from '@/infrastructure/repositories/UserRepository'
 
 export function authRouter(dbConnect: DataSource): Router {
