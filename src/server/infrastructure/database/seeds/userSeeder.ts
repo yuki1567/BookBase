@@ -25,7 +25,7 @@ async function generateUserData(loopCount: number): Promise<UserORM[]> {
     [...Array(loopCount)].map(async () => {
       const user = new UserORM()
       user.email = faker.internet.email()
-      const password = faker.internet.password({ length: 8 })
+      const password = 'password'
       user.password = await PasswordAdapter.hash(password)
       user.status = 1
       return user
