@@ -5,6 +5,9 @@ module.exports = {
       cwd: './front',
       script: 'npm',
       args: 'run dev',
+      env: {
+        NODE_ENV: 'development',
+      },
       watch: false,
     },
     {
@@ -12,6 +15,9 @@ module.exports = {
       cwd: './server',
       script: 'npm',
       args: 'run dev',
+      env: {
+        NODE_ENV: 'development',
+      },
       watch: true,
     },
   ],
