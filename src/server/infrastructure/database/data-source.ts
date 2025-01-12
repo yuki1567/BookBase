@@ -18,3 +18,14 @@ const AppDataSource = new DataSource({
 })
 
 export default AppDataSource
+
+export async function initializeDatabase(): Promise<DataSource> {
+  try {
+    await AppDataSource.initialize()
+    console.log('Database initialize successfully')
+  } catch {
+    console.error('Database initialize failed')
+  }
+
+  return AppDataSource
+}

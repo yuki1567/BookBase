@@ -1,18 +1,21 @@
 import express, { Response } from 'express'
-import AppDataSource from '@/infrastructure/database/data-source'
+import { initializeDatabase } from '@/infrastructure/database/data-source'
 import { UserORM } from '@/infrastructure/database/entities/UserORM'
 import { BookORM } from '@/infrastructure/database/entities/BookORM'
 import { Books } from '@shared/types/api/response/book'
+import { authRouter } from '@/interfaces/routers/authRouter'
 
 const PORT = 4000
 const app = express()
 const startServer = async () => {
-  const connect = await AppDataSource.initialize()
+  const connect = await initializeDatabase()
   app.use(express.json())
 
   app.listen(PORT, () => {
     console.log('server application start')
   })
+
+  app.use('/api/login', authRouter(connect))
 
   app.get('/api/hello', async (_, res: Response) => {
     // req.addListener

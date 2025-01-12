@@ -11,6 +11,6 @@ export class PasswordAdapter {
     plaintextPassword: string,
     hashedPassword: string,
   ): Promise<boolean> {
-    return await bcrypt.compare(plaintextPassword, hashedPassword)
+    return bcrypt.compare(plaintextPassword, hashedPassword)
   }
 }

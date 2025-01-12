@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import { Config } from '@/types/config'
 
 dotenv.config({ path: '../.env' })
 
@@ -14,4 +15,4 @@ function isDefind(key: any): string {
 export const Appconfig = {
   IS_PRODUCTION: isDefind('NODE_ENV') === 'production',
   JWT_SECRET_KEY: isDefind('JWT_SECRET_KEY'),
-} as const
+} as const satisfies Config
