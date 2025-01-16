@@ -1,8 +1,6 @@
-import 'reflect-metadata'
-import { DataSource } from 'typeorm'
-import { BookORM } from '../entities/BookORM'
+import { dataSource } from '@/infrastructure/database/databaseConfig'
+import { BookORM } from '@/infrastructure/database/entities/BookORM'
 import { faker } from '@faker-js/faker'
-import { resolve } from 'path'
 
 async function seed(): Promise<void> {
   const loopCount = Number(process.argv[2])
@@ -11,22 +9,7 @@ async function seed(): Promise<void> {
     return
   }
 
-  const AppDataSource = new DataSource({
-    type: 'mysql',
-    host: 'mysql',
-    port: 3306,
-    username: 'root',
-    password: 'password',
-    database: 'BookBase',
-    synchronize: false,
-    logging: true,
-    entities: [resolve(__dirname, './entities/*.ts')],
-    migrations: [resolve(__dirname, './migrations/migration-files/*.ts')],
-    subscribers: [],
-    migrationsRun: false,
-  })
-
-  const connect = await AppDataSource.initialize()
+  const connect = await dataSource.initialize()
 
   const bookRepository = connect.getRepository(BookORM)
 

@@ -1,9 +1,14 @@
 import { ApplicationError } from '@/application/errors/ApplicationError'
-import { Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { errorCode } from '@/maps/errorMap'
-import { createErrorResponse } from '@/application/errors/createErrorResponse'
+import { createErrorResponse } from '@/interfaces/presenters/createErrorResponse'
 
-export function errorHandler(error: unknown, res: Response): void {
+export function errorMiddleware(
+  error: unknown,
+  _req: Request,
+  res: Response,
+  _next: NextFunction,
+): void {
   if (error instanceof ApplicationError) {
     const responseData = createErrorResponse(
       error.statusCode,
