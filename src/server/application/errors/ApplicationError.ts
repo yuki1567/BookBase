@@ -2,9 +2,9 @@ import { errorDetails, ErrorCode } from '@/maps/errorMap'
 
 export class ApplicationError extends Error {
   constructor(
-    private _statusCode: number,
-    private _title: string,
-    private _details: string,
+    private readonly _statusCode: number,
+    private readonly _title: string,
+    private readonly _details: string,
   ) {
     super(_details)
   }

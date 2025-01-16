@@ -6,12 +6,12 @@ import { createSuccessResponse } from '@/interfaces/presenters/createSuccessResp
 import 'express-async-errors'
 
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private readonly _authService: AuthService) {}
 
   public async login(req: Request, res: Response): Promise<void> {
     const { email, password }: LoginRequest = req.body
 
-    const LoginResponseData = await this.authService.login(email, password)
+    const LoginResponseData = await this._authService.login(email, password)
 
     this.setCookie(res, LoginResponseData.token)
 

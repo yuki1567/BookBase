@@ -6,13 +6,13 @@ import { errorCode } from '@/maps/errorMap'
 import { ApplicationError } from '@/application/errors/ApplicationError'
 
 export class AuthService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private readonly _userRepository: UserRepository) {}
 
   public async login(
     email: string,
     password: string,
   ): Promise<LoginResponseData> {
-    const user = await this.userRepository.findUser(email)
+    const user = await this._userRepository.findUser(email)
     if (!user) {
       throw ApplicationError.formatErrorCode(errorCode.LOGIN_ERROR_CODE)
     }

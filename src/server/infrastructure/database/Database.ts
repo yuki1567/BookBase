@@ -4,23 +4,23 @@ import { errorCode } from '@/maps/errorMap'
 import { dataSource } from '@/infrastructure/database/databaseConfig'
 
 export class Database {
-  private static readonly dbConnect: DataSource = dataSource
+  private static readonly _dbConnect: DataSource = dataSource
 
   public static async initialize(): Promise<DataSource> {
-    if (!this.dbConnect.isInitialized) {
-      await this.dbConnect.initialize()
+    if (!this._dbConnect.isInitialized) {
+      await this._dbConnect.initialize()
     }
 
-    return this.dbConnect
+    return this._dbConnect
   }
 
   public static getDbConnect(): DataSource {
-    if (!this.dbConnect.isInitialized) {
+    if (!this._dbConnect.isInitialized) {
       throw ApplicationError.formatErrorCode(
         errorCode.DATABASE_CONNECTION_ERROR,
       )
     }
 
-    return this.dbConnect
+    return this._dbConnect
   }
 }
