@@ -1,32 +1,24 @@
-import { errorDetails, ErrorCode } from '@/maps/errorMap'
+import { errorDetails, ErrorKeys } from '@/application/errors/errorMap'
+import { ErrorResponse } from '@shared/types/api/response'
 
 export class ApplicationError extends Error {
-  constructor(
-    private readonly _statusCode: number,
-    private readonly _title: string,
-    private readonly _details: string,
-  ) {
-    super(_details)
+  constructor(private readonly _errorResponse: ErrorResponse) {
+    super(_errorResponse.details)
   }
 
   get statusCode(): number {
-    return this._statusCode
+    return this._errorResponse.statusCode
   }
 
   get title(): string {
-    return this._title
+    return this._errorResponse.title
   }
 
   get details(): string {
-    return this._details
+    return this._errorResponse.details
   }
 
-  static formatErrorCode(errorCode: ErrorCode): ApplicationError {
-    const error = errorDetails[errorCode]
-    if (!error) {
-      throw new Error(`未定義のエラーコードです。(${errorCode})`)
-    }
-
-    return new ApplicationError(error.statusCode, error.title, error.details)
+  static formatErrorCode(ErrorKeys: ErrorKeys): ApplicationError {
+    return new ApplicationError(errorDetails[ErrorKeys])
   }
 }

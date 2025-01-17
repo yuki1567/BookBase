@@ -2,7 +2,6 @@ import { JwtAdapter } from '@/infrastructure/JwtAdapter'
 import { PasswordAdapter } from '@/infrastructure/PasswordAdapter'
 import { UserRepository } from '@/infrastructure/repositories/UserRepository'
 import { LoginResponseData } from '@shared/types/api/response'
-import { errorCode } from '@/maps/errorMap'
 import { ApplicationError } from '@/application/errors/ApplicationError'
 
 export class AuthService {
@@ -14,7 +13,7 @@ export class AuthService {
   ): Promise<LoginResponseData> {
     const user = await this._userRepository.findUser(email)
     if (!user) {
-      throw ApplicationError.formatErrorCode(errorCode.LOGIN_ERROR_CODE)
+      throw ApplicationError.formatErrorCode('LOGIN_FAILD')
     }
 
     const isPasswordCorrect = await PasswordAdapter.compare(
@@ -23,7 +22,7 @@ export class AuthService {
     )
 
     if (!isPasswordCorrect) {
-      throw ApplicationError.formatErrorCode(errorCode.LOGIN_ERROR_CODE)
+      throw ApplicationError.formatErrorCode('LOGIN_FAILD')
     }
 
     const token = JwtAdapter.generateToken(String(user.id))

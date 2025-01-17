@@ -1,6 +1,5 @@
 import { DataSource } from 'typeorm'
 import { ApplicationError } from '@/application/errors/ApplicationError'
-import { errorCode } from '@/maps/errorMap'
 import { dataSource } from '@/infrastructure/database/databaseConfig'
 
 export class Database {
@@ -16,11 +15,8 @@ export class Database {
 
   public static getDbConnect(): DataSource {
     if (!this._dbConnect.isInitialized) {
-      throw ApplicationError.formatErrorCode(
-        errorCode.DATABASE_CONNECTION_ERROR,
-      )
+      throw ApplicationError.formatErrorCode('DATABASE_ERROR')
     }
-
     return this._dbConnect
   }
 }

@@ -1,6 +1,5 @@
 import { ApplicationError } from '@/application/errors/ApplicationError'
 import { NextFunction, Request, Response } from 'express'
-import { errorCode } from '@/maps/errorMap'
 import { createErrorResponse } from '@/interfaces/presenters/createErrorResponse'
 
 export function errorMiddleware(
@@ -17,7 +16,7 @@ export function errorMiddleware(
     )
     res.status(error.statusCode).json(responseData)
   } else {
-    const error = ApplicationError.formatErrorCode(errorCode.UNKNOWN_ERROR_CODE)
+    const error = ApplicationError.formatErrorCode('UNKNOWN_ERROR')
     const responseData = createErrorResponse(
       error.statusCode,
       error.title,
