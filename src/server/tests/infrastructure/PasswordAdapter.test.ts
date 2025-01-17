@@ -1,4 +1,4 @@
-import { PasswordAdapter } from '@/infrastructure/PasswordAdapter'
+import { PasswordAdapter } from '@/infrastructure/adapters/PasswordAdapter'
 import { faker } from '@faker-js/faker/.'
 
 describe('PasswordAdapter', () => {

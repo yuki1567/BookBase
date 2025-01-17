@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { LoginRequest } from '@shared/types/api/request'
-import { Appconfig } from '@/infrastructure/config'
+import { envConfig } from '@/infrastructure/config/envConfig'
 import { AuthService } from '@/application/services/AuthService'
 import { createSuccessResponse } from '@/interfaces/presenters/createSuccessResponse'
 import 'express-async-errors'
@@ -21,7 +21,7 @@ export class AuthController {
   private setCookie(res: Response, value: string): void {
     res.cookie(`${value}`, value, {
       httpOnly: true,
-      secure: Appconfig.IS_PRODUCTION,
+      secure: envConfig.IS_PRODUCTION,
     })
   }
 }

@@ -1,5 +1,5 @@
 import { sign } from 'jsonwebtoken'
-import { Appconfig } from './config'
+import { envConfig } from '@/infrastructure/config/envConfig'
 
 export class JwtAdapter {
   static generateToken(id: string): string {
@@ -10,6 +10,6 @@ export class JwtAdapter {
       expiresIn: '1d',
     }
 
-    return sign(jwtPayload, Appconfig.JWT_SECRET_KEY, option)
+    return sign(jwtPayload, envConfig.JWT_SECRET_KEY, option)
   }
 }

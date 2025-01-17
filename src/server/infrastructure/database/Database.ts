@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm'
 import { ApplicationError } from '@/application/errors/ApplicationError'
-import { dataSource } from '@/infrastructure/database/databaseConfig'
+import { dataSource } from '@/infrastructure/config/databaseConfig'
 
 export class Database {
   private static readonly _dbConnect: DataSource = dataSource

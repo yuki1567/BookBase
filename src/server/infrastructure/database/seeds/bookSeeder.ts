@@ -1,4 +1,4 @@
-import { dataSource } from '@/infrastructure/database/databaseConfig'
+import { dataSource } from '@/infrastructure/config/databaseConfig'
 import { BookORM } from '@/infrastructure/database/entities/BookORM'
 import { faker } from '@faker-js/faker'
 

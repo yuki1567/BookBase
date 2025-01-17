@@ -1,7 +1,7 @@
-import { dataSource } from '@/infrastructure/database/databaseConfig'
+import { dataSource } from '@/infrastructure/config/databaseConfig'
 import { UserORM } from '@/infrastructure/database/entities/UserORM'
 import { faker } from '@faker-js/faker'
-import { PasswordAdapter } from '@/infrastructure/PasswordAdapter'
+import { PasswordAdapter } from '@/infrastructure/adapters/PasswordAdapter'
 
 async function seed(): Promise<void> {
   const loopCount = Number(process.argv[2])

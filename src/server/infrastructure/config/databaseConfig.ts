@@ -11,8 +11,10 @@ export const dataSource = new DataSource({
   database: 'BookBase',
   synchronize: false,
   logging: true,
-  entities: [resolve(__dirname, './entities/*.ts')],
-  migrations: [resolve(__dirname, './migrations/migration-files/*.ts')],
+  entities: [resolve(__dirname, '../database/entities/*.ts')],
+  migrations: [
+    resolve(__dirname, '../database/migrations/migration-files/*.ts'),
+  ],
   subscribers: [],
   migrationsRun: false,
 })

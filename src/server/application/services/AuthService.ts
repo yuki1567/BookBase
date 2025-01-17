@@ -1,5 +1,5 @@
-import { JwtAdapter } from '@/infrastructure/JwtAdapter'
-import { PasswordAdapter } from '@/infrastructure/PasswordAdapter'
+import { JwtAdapter } from '@/infrastructure/adapters/JwtAdapter'
+import { PasswordAdapter } from '@/infrastructure/adapters/PasswordAdapter'
 import { UserRepository } from '@/infrastructure/repositories/UserRepository'
 import { LoginResponseData } from '@shared/types/api/response'
 import { ApplicationError } from '@/application/errors/ApplicationError'
