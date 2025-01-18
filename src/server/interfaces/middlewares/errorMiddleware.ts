@@ -9,6 +9,7 @@ export function errorMiddleware(
   _next: NextFunction,
 ): void {
   if (error instanceof ApplicationError) {
+    console.error(error)
     const responseData = createErrorResponse(
       error.statusCode,
       error.title,
@@ -16,11 +17,12 @@ export function errorMiddleware(
     )
     res.status(error.statusCode).json(responseData)
   } else {
-    const error = ApplicationError.formatErrorCode('UNKNOWN_ERROR')
+    console.error(error)
+    const errorResponse = ApplicationError.formatErrorCode('UNKNOWN_ERROR')
     const responseData = createErrorResponse(
-      error.statusCode,
-      error.title,
-      error.details,
+      errorResponse.statusCode,
+      errorResponse.title,
+      errorResponse.details,
     )
     res.status(500).json(responseData)
   }
