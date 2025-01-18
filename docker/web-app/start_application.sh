@@ -10,6 +10,8 @@ cd /var/www/html/src/
 npm i
 cd /var/www/html/src/server
 npm i
+npm run migration:run
+npm run seed
 cd /var/www/html/src/front
 npm i
 cd /var/www/html/src/
