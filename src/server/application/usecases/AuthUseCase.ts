@@ -15,7 +15,7 @@ export class AuthUseCase {
     email: string,
     password: string,
   ): Promise<LoginResponseData> {
-    const user = await this._userRepository.findUser(email)
+    const user = await this._userRepository.findByEmail(email)
     if (!user) {
       throw ApplicationError.formatErrorCode('LOGIN_FAILD')
     }

@@ -1,5 +1,5 @@
-import { UserORM } from '@/infrastructure/database/entities/UserORM'
+import { User } from '@/domain/User'
 
 export interface IUserRepository {
-  findUser(email: string): Promise<UserORM | undefined>
+  findByEmail(email: string): Promise<User | undefined>
 }
