@@ -1,12 +1,12 @@
-import { UserRepository } from '@/infrastructure/repositories/UserRepository'
 import { LoginResponseData } from '@shared/types/api/response'
 import { ApplicationError } from '@/application/errors/ApplicationError'
-import { PasswordService } from '@/application/interfaces/PasswordService'
-import { JwtService } from '@/application/interfaces/JwtService'
+import { PasswordService } from '@/application/gateways/PasswordService'
+import { JwtService } from '@/application/gateways/JwtService'
+import { IUserRepository } from '../repositories/IUserRepository'
 
 export class AuthUseCase {
   constructor(
-    private readonly _userRepository: UserRepository,
+    private readonly _userRepository: IUserRepository,
     private readonly _passwordService: PasswordService,
     private readonly _jwtService: JwtService,
   ) {}

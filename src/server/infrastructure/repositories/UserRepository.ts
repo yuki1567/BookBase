@@ -1,7 +1,8 @@
-import { Database } from '../database/Database'
-import { UserORM } from '../database/entities/UserORM'
+import { IUserRepository } from '@/application/repositories/IUserRepository'
+import { Database } from '@/infrastructure/database/Database'
+import { UserORM } from '@/infrastructure/database/entities/UserORM'
 
-export class UserRepository {
+export class UserRepository implements IUserRepository {
   public async findUser(email: string): Promise<UserORM | undefined> {
     const dbConnect = Database.getDbConnect()
     const userRepository = dbConnect.getRepository(UserORM)
