@@ -1,13 +1,14 @@
+import { PasswordService } from '@/application/interfaces/PasswordService'
 import bcrypt from 'bcrypt'
 
-export class PasswordAdapter {
-  private static readonly SALT_ROUNDS = 10
+export class PasswordAdapter implements PasswordService {
+  private readonly SALT_ROUNDS = 10
 
-  static async hash(plaintextPassword: string): Promise<string> {
+  async hashPassword(plaintextPassword: string): Promise<string> {
     return bcrypt.hash(plaintextPassword, this.SALT_ROUNDS)
   }
 
-  static async compare(
+  async verifyPassword(
     plaintextPassword: string,
     hashedPassword: string,
   ): Promise<boolean> {

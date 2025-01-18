@@ -21,12 +21,14 @@ async function seed(): Promise<void> {
 }
 
 async function generateUserData(loopCount: number): Promise<UserORM[]> {
+  const passwordAdapter = new PasswordAdapter()
+
   const users = await Promise.all(
     [...Array(loopCount)].map(async () => {
       const user = new UserORM()
       user.email = faker.internet.email()
       const password = 'password'
-      user.password = await PasswordAdapter.hash(password)
+      user.password = await passwordAdapter.hashPassword(password)
       user.status = 1
       return user
     }),

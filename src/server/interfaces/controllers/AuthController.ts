@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
 import { LoginRequest } from '@shared/types/api/request'
 import { envConfig } from '@/infrastructure/config/envConfig'
-import { AuthService } from '@/application/services/AuthService'
+import { AuthUseCase } from '@/application/usecases/AuthUseCase'
 import { createSuccessResponse } from '@/interfaces/presenters/createSuccessResponse'
 import 'express-async-errors'
 
 export class AuthController {
-  constructor(private readonly _authService: AuthService) {}
+  constructor(private readonly _authService: AuthUseCase) {}
 
   public async login(req: Request, res: Response): Promise<void> {
     const { email, password }: LoginRequest = req.body

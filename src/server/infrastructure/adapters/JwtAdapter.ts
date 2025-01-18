@@ -2,7 +2,7 @@ import { sign } from 'jsonwebtoken'
 import { envConfig } from '@/infrastructure/config/envConfig'
 
 export class JwtAdapter {
-  static generateToken(id: string): string {
+  public generateToken(id: string): string {
     const jwtPayload = {
       id: id,
     }
