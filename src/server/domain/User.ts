@@ -1,7 +1,19 @@
 export class User {
   constructor(
-    public readonly id: number,
-    public readonly email: string,
-    public readonly password: string,
+    private readonly _id: number,
+    private readonly _email: string,
+    private readonly _password: string,
   ) {}
+
+  get id(): number {
+    return this._id
+  }
+
+  get email(): string {
+    return this._email
+  }
+
+  get password(): string {
+    return this._password
+  }
 }
