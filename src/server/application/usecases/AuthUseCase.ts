@@ -1,14 +1,14 @@
 import { LoginResponseData } from '@shared/types/api/response'
 import { ApplicationError } from '@/application/errors/ApplicationError'
-import { PasswordService } from '@/application/gateways/PasswordService'
-import { JwtService } from '@/application/gateways/JwtService'
+import { IPasswordGateway } from '@/application/gateways/IPasswordGateway'
+import { IJwtGateway } from '@/application/gateways/IJwtGateway'
 import { IUserRepository } from '../repositories/IUserRepository'
 
 export class AuthUseCase {
   constructor(
     private readonly _userRepository: IUserRepository,
-    private readonly _passwordService: PasswordService,
-    private readonly _jwtService: JwtService,
+    private readonly _passwordService: IPasswordGateway,
+    private readonly _jwtService: IJwtGateway,
   ) {}
 
   public async login(

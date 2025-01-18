@@ -1,7 +1,7 @@
-import { PasswordService } from '@/application/interfaces/PasswordService'
+import { IPasswordGateway } from '@/application/gateways/IPasswordGateway'
 import bcrypt from 'bcrypt'
 
-export class PasswordGateway implements PasswordService {
+export class PasswordGateway implements IPasswordGateway {
   private readonly SALT_ROUNDS = 10
 
   async hashPassword(plaintextPassword: string): Promise<string> {

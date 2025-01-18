@@ -1,8 +1,8 @@
 import { sign } from 'jsonwebtoken'
 import { envConfig } from '@/infrastructure/config/envConfig'
-import { JwtService } from '@/application/interfaces/JwtService'
+import { IJwtGateway } from '@/application/gateways/IJwtGateway'
 
-export class JwtGateway implements JwtService {
+export class JwtGateway implements IJwtGateway {
   public generateToken(id: string): string {
     const jwtPayload = {
       id: id,

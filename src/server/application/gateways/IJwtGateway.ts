@@ -1,3 +1,3 @@
-export interface JwtService {
+export interface IJwtGateway {
   generateToken(id: string): string
 }

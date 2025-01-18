@@ -1,4 +1,4 @@
-export interface PasswordService {
+export interface IPasswordGateway {
   hashPassword(plaintextPassword: string): Promise<string>
   verifyPassword(
     plaintextPassword: string,
