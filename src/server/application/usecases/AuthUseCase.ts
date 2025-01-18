@@ -7,8 +7,8 @@ import { IUserRepository } from '../repositories/IUserRepository'
 export class AuthUseCase {
   constructor(
     private readonly _userRepository: IUserRepository,
-    private readonly _passwordService: IPasswordGateway,
-    private readonly _jwtService: IJwtGateway,
+    private readonly _passwordGateway: IPasswordGateway,
+    private readonly _jwtGateway: IJwtGateway,
   ) {}
 
   public async login(
@@ -20,7 +20,7 @@ export class AuthUseCase {
       throw ApplicationError.formatErrorCode('LOGIN_FAILD')
     }
 
-    const isPasswordCorrect = this._passwordService.verifyPassword(
+    const isPasswordCorrect = this._passwordGateway.verifyPassword(
       password,
       user.password,
     )
@@ -29,7 +29,7 @@ export class AuthUseCase {
       throw ApplicationError.formatErrorCode('LOGIN_FAILD')
     }
 
-    const token = this._jwtService.generateToken(String(user.id))
+    const token = this._jwtGateway.generateToken(String(user.id))
 
     return {
       userid: user.id,
