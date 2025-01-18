@@ -1,7 +1,7 @@
 import { PasswordService } from '@/application/interfaces/PasswordService'
 import bcrypt from 'bcrypt'
 
-export class PasswordAdapter implements PasswordService {
+export class PasswordGateway implements PasswordService {
   private readonly SALT_ROUNDS = 10
 
   async hashPassword(plaintextPassword: string): Promise<string> {

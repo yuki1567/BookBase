@@ -1,7 +1,8 @@
 import { sign } from 'jsonwebtoken'
 import { envConfig } from '@/infrastructure/config/envConfig'
+import { JwtService } from '@/application/interfaces/JwtService'
 
-export class JwtAdapter {
+export class JwtGateway implements JwtService {
   public generateToken(id: string): string {
     const jwtPayload = {
       id: id,

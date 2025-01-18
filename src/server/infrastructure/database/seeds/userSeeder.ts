@@ -1,7 +1,7 @@
 import { dataSource } from '@/infrastructure/config/databaseConfig'
 import { UserORM } from '@/infrastructure/database/entities/UserORM'
 import { faker } from '@faker-js/faker'
-import { PasswordAdapter } from '@/infrastructure/adapters/PasswordAdapter'
+import { PasswordGateway } from '@/infrastructure/gateways/PasswordGateway'
 
 async function seed(): Promise<void> {
   const loopCount = Number(process.argv[2])
@@ -21,7 +21,7 @@ async function seed(): Promise<void> {
 }
 
 async function generateUserData(loopCount: number): Promise<UserORM[]> {
-  const passwordAdapter = new PasswordAdapter()
+  const passwordAdapter = new PasswordGateway()
 
   const users = await Promise.all(
     [...Array(loopCount)].map(async () => {

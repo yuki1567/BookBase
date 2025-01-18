@@ -1,10 +1,10 @@
-import { PasswordAdapter } from '@/infrastructure/adapters/PasswordAdapter'
+import { PasswordGateway } from '@/infrastructure/gateways/PasswordGateway'
 import { faker } from '@faker-js/faker/.'
 
 describe('PasswordAdapter', () => {
   const length = faker.number.int({ min: 8, max: 16 })
   const testPassword = faker.string.alphanumeric(length)
-  const passwordAdapter = new PasswordAdapter()
+  const passwordAdapter = new PasswordGateway()
 
   describe('hash method', () => {
     it('パスワードが正しくハッシュ化されること', async () => {
