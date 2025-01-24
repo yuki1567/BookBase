@@ -1,6 +1,6 @@
 import { ApplicationError } from '@/application/errors/ApplicationError'
 import { NextFunction, Request, Response } from 'express'
-import { createErrorResponse } from '@/interfaces/presenters/createErrorResponse'
+import { z } from 'zod'
 
 export function errorMiddleware(
   error: unknown,
@@ -10,20 +10,33 @@ export function errorMiddleware(
 ): void {
   if (error instanceof ApplicationError) {
     console.error(error)
-    const responseData = createErrorResponse(
-      error.statusCode,
-      error.title,
-      error.details,
-    )
-    res.status(error.statusCode).json(responseData)
+    res.status(error.errorResponse.statusCode).json(error.errorResponse)
+  } else if (error instanceof z.ZodError) {
+    console.error(error)
+    const details = error.errors.map((e) => {
+      console.log(e)
+      const [field] = e.path
+
+      return {
+        title: 'バリデーションエラー',
+        field: String(field),
+        message: e.message,
+      }
+    })
+
+    const errorResponse = new ApplicationError({
+      isSuccess: false,
+      statusCode: 200,
+      details: details,
+    })
+    res
+      .status(errorResponse.errorResponse.statusCode)
+      .json(errorResponse.errorResponse)
   } else {
     console.error(error)
     const errorResponse = ApplicationError.formatErrorCode('UNKNOWN_ERROR')
-    const responseData = createErrorResponse(
-      errorResponse.statusCode,
-      errorResponse.title,
-      errorResponse.details,
-    )
-    res.status(500).json(responseData)
+    res
+      .status(errorResponse.errorResponse.statusCode)
+      .json(errorResponse.errorResponse)
   }
 }
