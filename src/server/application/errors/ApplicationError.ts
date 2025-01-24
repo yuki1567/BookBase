@@ -3,19 +3,11 @@ import { ErrorResponse } from '@shared/types/api/response'
 
 export class ApplicationError extends Error {
   constructor(private readonly _errorResponse: ErrorResponse) {
-    super(_errorResponse.details)
+    super(_errorResponse.details[0].message)
   }
 
-  get statusCode(): number {
-    return this._errorResponse.statusCode
-  }
-
-  get title(): string {
-    return this._errorResponse.title
-  }
-
-  get details(): string {
-    return this._errorResponse.details
+  get errorResponse(): ErrorResponse {
+    return this._errorResponse
   }
 
   static formatErrorCode(ErrorKeys: ErrorKeys): ApplicationError {

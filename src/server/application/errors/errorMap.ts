@@ -4,21 +4,35 @@ export const errorDefinitions = {
   LOGIN_FAILD: {
     isSuccess: false,
     statusCode: 401,
-    title: 'ログインエラー',
-    details:
-      'メールアドレス、もしくはパスワードが間違っているため、ログインに失敗しました。',
+    details: [
+      {
+        title: 'ログインエラー',
+        message:
+          'メールアドレス、もしくはパスワードが間違っているため、ログインに失敗しました。',
+      },
+    ],
   },
   DATABASE_ERROR: {
     isSuccess: false,
     statusCode: 500,
-    title: 'DBエラー',
-    details: 'データベースエラーが発生しました。管理者に問い合わせてください。',
+    details: [
+      {
+        title: 'DBエラー',
+        message:
+          'データベースエラーが発生しました。管理者に問い合わせてください。',
+      },
+    ],
   },
   UNKNOWN_ERROR: {
     isSuccess: false,
     statusCode: 500,
-    title: '不明なエラー',
-    details: '原因不明のエラーが発生しました。管理者に問い合わせてください。',
+    details: [
+      {
+        title: '不明なエラー',
+        message:
+          '原因不明のエラーが発生しました。管理者に問い合わせてください。',
+      },
+    ],
   },
 } as const
 
