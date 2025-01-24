@@ -20,7 +20,7 @@ export class AuthUseCase {
       throw ApplicationError.formatErrorCode('LOGIN_FAILD')
     }
 
-    const isPasswordCorrect = this._passwordGateway.verifyPassword(
+    const isPasswordCorrect = await this._passwordGateway.verifyPassword(
       password,
       user.password,
     )
