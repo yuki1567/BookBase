@@ -17,12 +17,12 @@ export function errorMiddleware(
   }
 }
 
-function handleApplicationError(response: Response, error: ApplicationError) {
+function handleApplicationError(res: Response, error: ApplicationError) {
   console.error(error)
-  response.status(error.errorResponse.statusCode).json(error.errorResponse)
+  res.status(error.errorResponse.statusCode).json(error.errorResponse)
 }
 
-function handleZodError(response: Response, error: z.ZodError) {
+function handleZodError(res: Response, error: z.ZodError) {
   console.error(error)
   const details = error.errors.map(({ path, message }) => {
     return {
@@ -37,15 +37,15 @@ function handleZodError(response: Response, error: z.ZodError) {
     statusCode: 200,
     details: details,
   })
-  response
+  res
     .status(errorResponse.errorResponse.statusCode)
     .json(errorResponse.errorResponse)
 }
 
-function handleUnkownError(response: Response, error: unknown) {
+function handleUnkownError(res: Response, error: unknown) {
   console.error(error)
   const errorResponse = ApplicationError.formatErrorCode('UNKNOWN_ERROR')
-  response
+  res
     .status(errorResponse.errorResponse.statusCode)
     .json(errorResponse.errorResponse)
 }
