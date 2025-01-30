@@ -111,6 +111,8 @@
 
 命名フォーマット：<タイムスタンプ>-<アクション>\_<対象>
 
+例）npm run migration:generate User CreateTable
+
 ---
 
 ### アクション一覧
@@ -186,3 +188,86 @@
 
 4. **データの挿入**  
    `20241222-Insert_InitialRoles`
+
+## ディレクトリ構成案
+
+.
+├── docker/
+│ ├── DB/
+│ │ └── my.cnf
+│ └── web-app/
+│ ├── default.conf
+│ ├── Dockerfile
+│ └── start-application.sh
+└── src/
+├── front/
+│ ├── .nuxt
+│ ├── components (Atomic Design に基づく Vue コンポーネント)
+│ ├── layouts (共通レイアウト)
+│ ├── pages (ルーティングページ)
+│ ├── plugings (axios などのプラグイン)
+│ ├── services (ビジネスロジック)
+│ ├── types (型定義ファイル)
+│ ├── utils (ユーティリティ)
+│ └── nuxt.config.ts (Nuxt 設定ファイル)
+├── node_modules
+├── server/
+│ ├── app/ (アプリケーションの実コード)
+│ │ ├── domain (ドメイン層 詳細なビジネスロジック)
+│ │ ├── infrastructure/ (インフラ層 外部の DB などとやり取りする)
+│ │ │ ├── entities (TypeORM のエンティティを定義)
+│ │ │ └── repositories (TypeORM のリポジトリ実装)
+│ │ ├── application/ (アプリケーション層 ビジネスロジックの流れを記載)
+│ │ │ └── useCases
+│ │ └── interfaces/ (プレゼンテーション層 )
+│ │ ├── controllers ()
+│ │ └── routers (エンドポイントで受け取った処理をコントローラーにルーティングする)
+│ ├── migrations
+│ ├── seeds
+│ ├── scripts
+│ └── tests
+├── shared/
+│ ├── types
+│ └── constans
+├── .eslintrc.js
+├── .prettierrc
+├── ecosystem.config.js
+├── package.json
+└── tsconfig.json
+
+# API 設計
+
+## 基本形
+
+```
+{
+  "method": "POST",
+  "url": "https://example.com/api/books",
+    "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer YOUR_ACCESS_TOKEN"
+  },
+  "body": {
+    "filters": {
+      "select": ["title", "descrption"],
+      "where": {
+        "category":
+      }
+    },
+    "pagination": {
+      "offset": 1,
+      "limit": 10
+    },
+    "sort": [
+      {
+        "field": "title",
+        "order": "desc"
+      },
+      {
+        "field": "description",
+        "order": "desc"
+      },
+    ]
+  }
+}
+```

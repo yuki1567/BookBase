@@ -1,4 +1,4 @@
-import { Config } from '@/types/config'
+import { Config } from '@/infrastructure/types/config'
 import dotenv from 'dotenv'
 
 dotenv.config({ path: '/var/www/html/.env' })

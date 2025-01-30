@@ -17,6 +17,33 @@ export class BookORM {
   @Column('text', { nullable: true })
   description!: string | null
 
+  @Column('varchar', { length: '255', nullable: true })
+  author!: string | null
+
+  @Column('text', { nullable: true })
+  author_biography!: string | null
+
+  @Column('varchar', { length: '255', nullable: false })
+  publisher!: string
+
+  @Column('date', { nullable: false })
+  release_date!: Date | null
+
+  @Column('varchar', { length: '255', nullable: true })
+  language!: string
+
+  @Column('int', { unsigned: true, nullable: false })
+  page_count!: number
+
+  @Column('char', { length: '13', unique: true, nullable: true })
+  isbn_13!: string | null
+
+  @Column('float', { unsigned: true, nullable: true })
+  width!: number
+
+  @Column('float', { unsigned: true, nullable: false })
+  height!: number
+
   @Column('int', { unsigned: true, nullable: false })
   price!: number
 
